@@ -25,16 +25,23 @@ class BillsProvider extends ChangeNotifier {
       .where((f) => _selectedRefs.contains(f.reference))
       .fold(0.0, (sum, f) => sum + f.montant);
 
-  Future<void> fetchFactures(String walletCode) async {
+  Future<void> fetchFactures(String walletCode, String serviceName) async {
     _state = BillsState.loading;
     _factures = [];
     _selectedRefs = {};
     _errorMessage = null;
     notifyListeners();
 
+    // SENELEC n'existe pas dans le backend, on renvoie directement une liste vide
+    if (serviceName.toUpperCase() == 'SENELEC') {
+      _state = BillsState.loaded;
+      notifyListeners();
+      return;
+    }
+
     try {
       final uri = Uri.parse(
-        '${ApiConstants.baseUrl}${ApiConstants.facturesCurrent(walletCode)}',
+        '${ApiConstants.baseUrl}${ApiConstants.facturesCurrent(walletCode)}?unite=$serviceName',
       );
       final response = await http.get(uri).timeout(ApiConstants.timeout);
 
@@ -46,11 +53,11 @@ class BillsProvider extends ChangeNotifier {
             .toList();
         _state = BillsState.loaded;
       } else {
-        _errorMessage = 'Impossible de récupérer les factures.';
+        _errorMessage = 'Peut-être pas de factures pour le moment';
         _state = BillsState.error;
       }
     } catch (e) {
-      _errorMessage = 'Erreur réseau lors de la récupération des factures.';
+      _errorMessage = 'Peut-être pas de factures pour le moment';
       _state = BillsState.error;
     }
     notifyListeners();
@@ -85,6 +92,8 @@ class BillsProvider extends ChangeNotifier {
     _errorMessage = null;
     notifyListeners();
 
+    final formattedPhone = phoneNumber.startsWith('+') ? phoneNumber : '+221$phoneNumber';
+
     try {
       final uri =
           Uri.parse('${ApiConstants.baseUrl}${ApiConstants.payFactures}');
@@ -93,7 +102,7 @@ class BillsProvider extends ChangeNotifier {
             uri,
             headers: {'Content-Type': 'application/json'},
             body: jsonEncode({
-              'phoneNumber': phoneNumber,
+              'phoneNumber': formattedPhone,
               'serviceName': serviceName,
               'factureReferences': _selectedRefs.toList(),
             }),

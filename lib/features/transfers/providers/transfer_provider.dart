@@ -25,6 +25,9 @@ class TransferProvider extends ChangeNotifier {
     _successMessage = null;
     notifyListeners();
 
+    final formattedSender = senderPhone.startsWith('+') ? senderPhone : '+221$senderPhone';
+    final formattedReceiver = receiverPhone.startsWith('+') ? receiverPhone : '+221$receiverPhone';
+
     try {
       final uri = Uri.parse('${ApiConstants.baseUrl}${ApiConstants.transfer}');
       final response = await http
@@ -32,8 +35,8 @@ class TransferProvider extends ChangeNotifier {
             uri,
             headers: {'Content-Type': 'application/json'},
             body: jsonEncode({
-              'senderPhone': senderPhone,
-              'receiverPhone': receiverPhone,
+              'senderPhone': formattedSender,
+              'receiverPhone': formattedReceiver,
               'amount': amount,
             }),
           )

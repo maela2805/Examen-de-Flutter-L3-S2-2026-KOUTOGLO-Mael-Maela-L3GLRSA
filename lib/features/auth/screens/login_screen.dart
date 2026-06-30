@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../providers/auth_provider.dart';
-import '../../dashboard/screens/home_screen.dart';
+import 'pin_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen>
     if (success && mounted) {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) => const HomeScreen(),
+          pageBuilder: (_, __, ___) => PinScreen(phoneNumber: phone),
           transitionsBuilder: (_, anim, __, child) => SlideTransition(
             position: Tween<Offset>(
               begin: const Offset(1, 0),

@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/utils/currency_formatter.dart';
 import '../../../features/auth/providers/auth_provider.dart';
+import '../../dashboard/providers/dashboard_provider.dart';
 import 'transfer_confirm_screen.dart';
 
 class TransferScreen extends StatefulWidget {
@@ -54,6 +55,22 @@ class _TransferScreenState extends State<TransferScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Montant invalide'),
+          backgroundColor: AppTheme.danger,
+        ),
+      );
+      return;
+    }
+
+    final double fees = (_amount * 0.01).clamp(0.0, 5000.0);
+    final double totalDebit = _amount + fees;
+    final double balance = context.read<DashboardProvider>().balance ?? 0.0;
+
+    if (totalDebit > balance) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Solde insuffisant pour cette opération. Montant + frais : ${CurrencyFormatter.format(totalDebit)} (Votre solde : ${CurrencyFormatter.format(balance)})',
+          ),
           backgroundColor: AppTheme.danger,
         ),
       );
@@ -235,6 +252,33 @@ class _TransferScreenState extends State<TransferScreen> {
             fontWeight: FontWeight.w500,
           ),
         ),
+        const SizedBox(height: 16),
+        if (_amount > 0) ...[
+          Text(
+            'Frais de transfert : ${CurrencyFormatter.format((_amount * 0.01).clamp(0.0, 5000.0))}',
+            style: const TextStyle(
+              color: AppTheme.textSecondary,
+              fontSize: 13,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Total à débiter de votre compte : ${CurrencyFormatter.format(_amount + (_amount * 0.01).clamp(0.0, 5000.0))}',
+            style: const TextStyle(
+              color: AppTheme.primaryPurple,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ] else
+          const Text(
+            'Des frais de 1% (max 5 000 XOF) s\'appliqueront en sus du montant envoyé.',
+            style: TextStyle(
+              color: AppTheme.textMuted,
+              fontSize: 12,
+            ),
+            textAlign: TextAlign.center,
+          ),
       ],
     );
   }

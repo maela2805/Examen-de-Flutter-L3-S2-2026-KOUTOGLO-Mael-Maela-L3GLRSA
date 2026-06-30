@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Bonjour 👋',
+                'Bonjour',
                 style: TextStyle(
                   fontSize: 14,
                   color: AppTheme.textSecondary,

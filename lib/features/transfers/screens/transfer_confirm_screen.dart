@@ -45,9 +45,20 @@ class TransferConfirmScreen extends StatelessWidget {
         ),
       );
     } else {
+      String errorMessage = provider.errorMessage ?? 'Échec du transfert';
+      if (errorMessage.contains('InsufficientBalanceException') ||
+          errorMessage.contains('Solde insuffisant')) {
+        errorMessage = 'Solde insuffisant pour effectuer ce transfert.';
+      } else if (errorMessage.contains('WalletNotFoundException') ||
+          errorMessage.contains('introuvable')) {
+        errorMessage = 'Le numéro du destinataire n\'est pas enregistré.';
+      } else {
+        errorMessage = 'Une erreur est survenue lors du transfert.';
+      }
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(provider.errorMessage ?? 'Échec du transfert'),
+          content: Text(errorMessage),
           backgroundColor: AppTheme.danger,
         ),
       );
@@ -118,6 +129,9 @@ class TransferConfirmScreen extends StatelessWidget {
   }
 
   Widget _buildDetailCard() {
+    final double fees = (amount * 0.01).clamp(0.0, 5000.0);
+    final double totalDebit = amount + fees;
+
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
@@ -128,12 +142,22 @@ class TransferConfirmScreen extends StatelessWidget {
       child: Column(
         children: [
           _DetailRow(label: 'De', value: senderPhone),
-          const Divider(color: AppTheme.divider, height: 24),
+          const Divider(color: AppTheme.divider, height: 16),
           _DetailRow(label: 'Vers', value: receiverPhone),
-          const Divider(color: AppTheme.divider, height: 24),
+          const Divider(color: AppTheme.divider, height: 16),
           _DetailRow(
-            label: 'Montant',
+            label: 'Montant envoyé',
             value: CurrencyFormatter.format(amount),
+          ),
+          const Divider(color: AppTheme.divider, height: 16),
+          _DetailRow(
+            label: 'Frais de transfert',
+            value: CurrencyFormatter.format(fees),
+          ),
+          const Divider(color: AppTheme.divider, height: 16),
+          _DetailRow(
+            label: 'Total à débiter',
+            value: CurrencyFormatter.format(totalDebit),
             isHighlight: true,
           ),
         ],

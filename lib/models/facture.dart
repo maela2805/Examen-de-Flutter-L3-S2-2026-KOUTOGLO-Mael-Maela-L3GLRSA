@@ -69,23 +69,5 @@ class BillProvider {
       emoji: '🎓',
       description: 'Scolarité',
     ),
-    BillProvider(
-      name: 'RAPIDO',
-      displayName: 'Rapido',
-      emoji: '🏍️',
-      description: 'Transport',
-    ),
-    BillProvider(
-      name: 'SDE',
-      displayName: 'SDE',
-      emoji: '💧',
-      description: 'Eau',
-    ),
-    BillProvider(
-      name: 'CANAL',
-      displayName: 'Canal+',
-      emoji: '📺',
-      description: 'Télévision',
-    ),
   ];
 }
