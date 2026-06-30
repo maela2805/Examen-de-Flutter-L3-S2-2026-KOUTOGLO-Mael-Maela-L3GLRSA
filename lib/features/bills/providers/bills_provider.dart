@@ -25,7 +25,7 @@ class BillsProvider extends ChangeNotifier {
       .where((f) => _selectedRefs.contains(f.reference))
       .fold(0.0, (sum, f) => sum + f.montant);
 
-  Future<void> fetchFactures(String walletCode) async {
+  Future<void> fetchFactures(String walletCode, String serviceName) async {
     _state = BillsState.loading;
     _factures = [];
     _selectedRefs = {};
@@ -34,7 +34,7 @@ class BillsProvider extends ChangeNotifier {
 
     try {
       final uri = Uri.parse(
-        '${ApiConstants.baseUrl}${ApiConstants.facturesCurrent(walletCode)}',
+        '${ApiConstants.baseUrl}${ApiConstants.facturesCurrent(walletCode)}?unite=$serviceName',
       );
       final response = await http.get(uri).timeout(ApiConstants.timeout);
 

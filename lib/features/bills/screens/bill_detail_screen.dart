@@ -29,7 +29,7 @@ class _BillDetailScreenState extends State<BillDetailScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context
           .read<BillsProvider>()
-          .fetchFactures(widget.walletCode);
+          .fetchFactures(widget.walletCode, widget.provider.name);
     });
   }
 
@@ -130,7 +130,7 @@ class _BillDetailScreenState extends State<BillDetailScreen> {
             return _ErrorView(
               message: provider.errorMessage ?? 'Erreur inconnue',
               onRetry: () =>
-                  provider.fetchFactures(widget.walletCode),
+                  provider.fetchFactures(widget.walletCode, widget.provider.name),
             );
           }
 
