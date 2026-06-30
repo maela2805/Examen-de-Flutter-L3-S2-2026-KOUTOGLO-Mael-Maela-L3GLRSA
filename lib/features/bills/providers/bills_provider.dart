@@ -32,6 +32,13 @@ class BillsProvider extends ChangeNotifier {
     _errorMessage = null;
     notifyListeners();
 
+    // SENELEC n'existe pas dans le backend, on renvoie directement une liste vide
+    if (serviceName.toUpperCase() == 'SENELEC') {
+      _state = BillsState.loaded;
+      notifyListeners();
+      return;
+    }
+
     try {
       final uri = Uri.parse(
         '${ApiConstants.baseUrl}${ApiConstants.facturesCurrent(walletCode)}?unite=$serviceName',
@@ -46,11 +53,11 @@ class BillsProvider extends ChangeNotifier {
             .toList();
         _state = BillsState.loaded;
       } else {
-        _errorMessage = 'Impossible de récupérer les factures.';
+        _errorMessage = 'Peut-être pas de factures pour le moment';
         _state = BillsState.error;
       }
     } catch (e) {
-      _errorMessage = 'Erreur réseau lors de la récupération des factures.';
+      _errorMessage = 'Peut-être pas de factures pour le moment';
       _state = BillsState.error;
     }
     notifyListeners();
