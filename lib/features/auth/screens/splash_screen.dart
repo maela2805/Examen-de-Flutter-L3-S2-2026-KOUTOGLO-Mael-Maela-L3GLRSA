@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../core/theme/app_theme.dart';
 import '../providers/auth_provider.dart';
 import 'login_screen.dart';
-import '../../dashboard/screens/home_screen.dart';
+import 'pin_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -62,7 +62,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     if (!mounted) return;
     if (auth.isAuthenticated) {
-      _goTo(const HomeScreen());
+      _goTo(PinScreen(phoneNumber: auth.phone ?? '', isConfirming: true));
     } else {
       _goTo(const LoginScreen());
     }
