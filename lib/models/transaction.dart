@@ -77,12 +77,18 @@ class Transaction {
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
+    final type = TransactionType.fromString(json['type'] ?? '');
+    final double amount = (json['amount'] ?? 0).toDouble();
+    final double fees = (json['fees'] ?? 0).toDouble();
+    
+    final double calculatedNetAmount = type.isCredit ? amount : (amount + fees);
+
     return Transaction(
       id: json['id'] ?? 0,
-      type: TransactionType.fromString(json['type'] ?? ''),
-      amount: (json['amount'] ?? 0).toDouble(),
-      fees: (json['fees'] ?? 0).toDouble(),
-      netAmount: (json['netAmount'] ?? 0).toDouble(),
+      type: type,
+      amount: amount,
+      fees: fees,
+      netAmount: calculatedNetAmount,
       description: json['description'],
       createdAt: json['createdAt'] != null
           ? DateTime.tryParse(json['createdAt'])
