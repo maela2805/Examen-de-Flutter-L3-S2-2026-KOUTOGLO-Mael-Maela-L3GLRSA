@@ -51,7 +51,6 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    // Après 2.5s, vérifier la session et naviguer
     Future.delayed(const Duration(milliseconds: 2500), _navigate);
   }
 
@@ -116,7 +115,6 @@ class _SplashScreenState extends State<SplashScreen>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Logo BadWallet
                 Container(
                   width: 100,
                   height: 100,
@@ -145,7 +143,6 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
                 const SizedBox(height: 24),
 
-                // Nom de l'application
                 ShaderMask(
                   shaderCallback: (bounds) =>
                       AppTheme.primaryGradient.createShader(bounds),
@@ -172,7 +169,6 @@ class _SplashScreenState extends State<SplashScreen>
 
                 const SizedBox(height: 60),
 
-                // Indicateur de chargement
                 SizedBox(
                   width: 32,
                   height: 32,

@@ -268,7 +268,6 @@ class _FactureTile extends StatelessWidget {
             ),
             const SizedBox(width: 14),
 
-            // Infos facture
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -295,7 +294,6 @@ class _FactureTile extends StatelessWidget {
               ),
             ),
 
-            // Montant
             Text(
               CurrencyFormatter.format(facture.montant),
               style: const TextStyle(

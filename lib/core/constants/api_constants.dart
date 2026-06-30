@@ -1,13 +1,7 @@
-// Constantes API — BadWallet Consumer App
-// Sur émulateur Android : localhost = 10.0.2.2
-// Sur vrai téléphone (même WiFi) : utiliser l'IP locale du PC
 
 class ApiConstants {
-  // ⚠️ IP WiFi du PC pour test sur vrai téléphone (même réseau WiFi)
-  // Changer en '10.0.2.2' pour émulateur Android
   static const String baseUrl = 'http://192.168.1.32:8080';
 
-  // ─── Wallets ───────────────────────────────────────────────
   static const String wallets = '/api/wallets';
 
   static String walletByPhone(String phone) =>
@@ -23,13 +17,11 @@ class ApiConstants {
   static const String pay = '/api/wallets/pay';
   static const String payFactures = '/api/wallets/pay-factures';
 
-  // ─── Factures externes ─────────────────────────────────────
   static String facturesCurrent(String walletCode) =>
       '/api/external/factures/$walletCode/current';
 
   static String facturesPeriode(String walletCode) =>
       '/api/external/factures/$walletCode/periode';
 
-  // ─── Timeout ───────────────────────────────────────────────
   static const Duration timeout = Duration(seconds: 15);
 }

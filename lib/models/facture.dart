@@ -1,5 +1,3 @@
-/// Modèle représentant une facture retournée par le Payment Service
-/// via GET /api/external/factures/{walletCode}/current
 class Facture {
   final String reference;
   final String serviceName;
@@ -36,7 +34,6 @@ class Facture {
       statut?.toUpperCase() == 'PAID' || statut?.toUpperCase() == 'PAYEE';
 }
 
-/// Fournisseurs de factures disponibles dans l'application
 class BillProvider {
   final String name;
   final String displayName;

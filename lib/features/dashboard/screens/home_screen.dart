@@ -43,22 +43,18 @@ class _HomeScreenState extends State<HomeScreen> {
             backgroundColor: AppTheme.bgCard,
             child: CustomScrollView(
               slivers: [
-                // ─── AppBar ─────────────────────────────────
                 SliverToBoxAdapter(
                   child: _buildHeader(auth),
                 ),
 
-                // ─── Carte Solde ─────────────────────────────
                 SliverToBoxAdapter(
                   child: _buildBalanceCard(dashboard),
                 ),
 
-                // ─── Actions rapides ──────────────────────────
                 SliverToBoxAdapter(
                   child: _buildQuickActions(),
                 ),
 
-                // ─── Dernières transactions ───────────────────
                 SliverToBoxAdapter(
                   child: _buildRecentTransactions(dashboard),
                 ),
@@ -72,7 +68,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ─── En-tête ──────────────────────────────────────────────────
   Widget _buildHeader(AuthProvider auth) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
@@ -100,7 +95,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           const Spacer(),
-          // Bouton déconnexion
           GestureDetector(
             onTap: () async {
               await context.read<AuthProvider>().logout();
@@ -130,7 +124,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ─── Carte de solde ───────────────────────────────────────────
   Widget _buildBalanceCard(DashboardProvider dashboard) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
@@ -175,7 +168,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             const SizedBox(height: 16),
 
-            // Montant
             if (dashboard.state == DashboardState.loading)
               const SizedBox(
                 height: 50,
@@ -216,7 +208,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 24),
 
-            // Numéro de téléphone stylisé
             Row(
               children: [
                 Container(
@@ -256,7 +247,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ─── Boutons d'actions rapides ────────────────────────────────
   Widget _buildQuickActions() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 28, 20, 0),
@@ -316,7 +306,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ─── Dernières transactions ───────────────────────────────────
   Widget _buildRecentTransactions(DashboardProvider dashboard) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 32, 20, 0),
@@ -375,7 +364,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// ─── Widget : Bouton action rapide ──────────────────────────────
 class _QuickActionButton extends StatelessWidget {
   final String emoji;
   final String label;
@@ -422,7 +410,6 @@ class _QuickActionButton extends StatelessWidget {
   }
 }
 
-// ─── Widget : Ligne de transaction ──────────────────────────────
 class _TransactionTile extends StatelessWidget {
   final Transaction transaction;
 
@@ -447,7 +434,6 @@ class _TransactionTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Icône
           Container(
             width: 44,
             height: 44,
@@ -464,7 +450,6 @@ class _TransactionTile extends StatelessWidget {
           ),
           const SizedBox(width: 12),
 
-          // Détails
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -493,7 +478,6 @@ class _TransactionTile extends StatelessWidget {
             ),
           ),
 
-          // Montant
           Text(
             amountStr,
             style: TextStyle(

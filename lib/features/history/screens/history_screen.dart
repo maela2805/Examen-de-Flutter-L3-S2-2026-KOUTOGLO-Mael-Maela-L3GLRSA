@@ -87,7 +87,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
             );
           }
 
-          // Grouper les transactions par date
           final grouped = _groupByDate(provider.transactions);
 
           return RefreshIndicator(
@@ -178,7 +177,6 @@ class _HistoryTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Icône transaction
           Container(
             width: 46,
             height: 46,
@@ -195,7 +193,6 @@ class _HistoryTile extends StatelessWidget {
           ),
           const SizedBox(width: 12),
 
-          // Détails
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,7 +228,6 @@ class _HistoryTile extends StatelessWidget {
             ),
           ),
 
-          // Montant
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [

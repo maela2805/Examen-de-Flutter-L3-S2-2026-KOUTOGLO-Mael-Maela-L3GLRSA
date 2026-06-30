@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // ─── Palette de couleurs ────────────────────────────────────
   static const Color primaryPurple = Color(0xFF6C63FF);
   static const Color primaryBlue = Color(0xFF3B82F6);
   static const Color accentCyan = Color(0xFF06B6D4);
@@ -15,13 +14,12 @@ class AppTheme {
   static const Color textSecondary = Color(0xFFB0B0C8);
   static const Color textMuted = Color(0xFF6B6B8A);
 
-  static const Color success = Color(0xFF10B981);   // Vert — dépôt / réception
-  static const Color danger = Color(0xFFEF4444);    // Rouge — retrait / envoi
-  static const Color warning = Color(0xFFF59E0B);   // Orange
+  static const Color success = Color(0xFF10B981);
+  static const Color danger = Color(0xFFEF4444);
+  static const Color warning = Color(0xFFF59E0B);
 
   static const Color divider = Color(0xFF2A2A40);
 
-  // ─── Dégradés ───────────────────────────────────────────────
   static const LinearGradient primaryGradient = LinearGradient(
     colors: [primaryPurple, primaryBlue],
     begin: Alignment.topLeft,
@@ -40,7 +38,6 @@ class AppTheme {
     end: Alignment.bottomRight,
   );
 
-  // ─── Thème principal ────────────────────────────────────────
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
@@ -147,7 +144,6 @@ class AppTheme {
     );
   }
 
-  // ─── Styles de texte ré-utilisables ─────────────────────────
   static TextStyle balanceStyle = GoogleFonts.poppins(
     fontSize: 42,
     fontWeight: FontWeight.w700,

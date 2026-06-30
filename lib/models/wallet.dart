@@ -40,7 +40,6 @@ class Wallet {
     );
   }
 
-  /// Copie avec un nouveau solde (après mise à jour)
   Wallet copyWith({double? balance}) {
     return Wallet(
       id: id,

@@ -170,7 +170,6 @@ class TransferConfirmScreen extends StatelessWidget {
       builder: (_, provider, __) {
         return Column(
           children: [
-            // Bouton Confirmer
             SizedBox(
               width: double.infinity,
               child: Container(
@@ -218,7 +217,6 @@ class TransferConfirmScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
 
-            // Bouton Annuler
             SizedBox(
               width: double.infinity,
               child: TextButton(

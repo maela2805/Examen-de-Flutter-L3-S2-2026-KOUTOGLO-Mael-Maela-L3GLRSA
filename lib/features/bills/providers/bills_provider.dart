@@ -32,7 +32,6 @@ class BillsProvider extends ChangeNotifier {
     _errorMessage = null;
     notifyListeners();
 
-    // SENELEC n'existe pas dans le backend, on renvoie directement une liste vide
     if (serviceName.toUpperCase() == 'SENELEC') {
       _state = BillsState.loaded;
       notifyListeners();

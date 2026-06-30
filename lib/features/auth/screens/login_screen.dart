@@ -102,7 +102,6 @@ class _LoginScreenState extends State<LoginScreen>
                   children: [
                     const SizedBox(height: 60),
 
-                    // Logo
                     Container(
                       width: 60,
                       height: 60,
@@ -131,7 +130,6 @@ class _LoginScreenState extends State<LoginScreen>
 
                     const SizedBox(height: 40),
 
-                    // Titre
                     const Text(
                       'Bienvenue\nsur BadWallet',
                       style: TextStyle(
@@ -153,7 +151,6 @@ class _LoginScreenState extends State<LoginScreen>
 
                     const SizedBox(height: 48),
 
-                    // Champ numéro de téléphone
                     Container(
                       decoration: BoxDecoration(
                         color: AppTheme.bgCard,
@@ -165,7 +162,6 @@ class _LoginScreenState extends State<LoginScreen>
                       ),
                       child: Row(
                         children: [
-                          // Indicatif pays
                           Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 16,
@@ -195,7 +191,6 @@ class _LoginScreenState extends State<LoginScreen>
                             ),
                           ),
 
-                          // Input
                           Expanded(
                             child: TextField(
                               controller: _phoneController,
@@ -231,7 +226,6 @@ class _LoginScreenState extends State<LoginScreen>
 
                     const SizedBox(height: 16),
 
-                    // Message d'erreur
                     Consumer<AuthProvider>(
                       builder: (_, auth, __) {
                         if (auth.errorMessage == null) return const SizedBox();
@@ -269,7 +263,6 @@ class _LoginScreenState extends State<LoginScreen>
 
                     const Spacer(),
 
-                    // Bouton Connexion
                     Consumer<AuthProvider>(
                       builder: (_, auth, __) {
                         final isLoading = auth.state == AuthState.loading;

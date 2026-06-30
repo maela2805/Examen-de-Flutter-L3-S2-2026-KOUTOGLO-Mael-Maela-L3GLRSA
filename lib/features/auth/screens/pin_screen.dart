@@ -4,7 +4,7 @@ import '../../dashboard/screens/home_screen.dart';
 
 class PinScreen extends StatefulWidget {
   final String phoneNumber;
-  final bool isConfirming; // true si c'est pour déverrouiller au démarrage
+  final bool isConfirming;
 
   const PinScreen({
     super.key,
@@ -18,7 +18,7 @@ class PinScreen extends StatefulWidget {
 
 class _PinScreenState extends State<PinScreen> {
   String _pin = '';
-  final String _correctPin = '1234'; // Code PIN simulé par défaut
+  final String _correctPin = '1234';
   String? _error;
 
   void _onKeyTap(String value) {
@@ -51,7 +51,7 @@ class _PinScreenState extends State<PinScreen> {
     } else {
       setState(() {
         _error = 'Code PIN incorrect. Réessayez.';
-        _pin = ''; // Réinitialise la saisie
+        _pin = '';
       });
     }
   }
@@ -67,7 +67,6 @@ class _PinScreenState extends State<PinScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 40),
-              // Icône cadenas simple et sobre
               Container(
                 width: 60,
                 height: 60,
@@ -102,7 +101,6 @@ class _PinScreenState extends State<PinScreen> {
               ),
               const SizedBox(height: 36),
 
-              // Ronds de code PIN
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(4, (index) {
@@ -125,7 +123,6 @@ class _PinScreenState extends State<PinScreen> {
               ),
               const SizedBox(height: 20),
 
-              // Zone message d'erreur
               SizedBox(
                 height: 24,
                 child: _error != null
@@ -141,7 +138,6 @@ class _PinScreenState extends State<PinScreen> {
               ),
               const SizedBox(height: 20),
 
-              // Pavé numérique épuré
               Expanded(
                 child: GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
@@ -154,17 +150,14 @@ class _PinScreenState extends State<PinScreen> {
                   itemCount: 12,
                   itemBuilder: (context, index) {
                     if (index == 9) {
-                      // Case vide ou optionnelle
                       return const SizedBox.shrink();
                     }
                     if (index == 11) {
-                      // Touche retour arrière
                       return _buildKey(
                         icon: Icons.backspace_outlined,
                         onTap: _onBackspace,
                       );
                     }
-                    // Chiffres 1-9 puis 0 (index 10)
                     final number = index == 10 ? '0' : '${index + 1}';
                     return _buildKey(
                       text: number,

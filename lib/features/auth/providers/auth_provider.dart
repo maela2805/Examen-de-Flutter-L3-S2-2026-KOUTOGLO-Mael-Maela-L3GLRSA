@@ -15,14 +15,12 @@ class AuthProvider extends ChangeNotifier {
   Wallet? _wallet;
   String? _errorMessage;
 
-  // ─── Getters ─────────────────────────────────────────────────
   AuthState get state => _state;
   String? get phone => _phone;
   Wallet? get wallet => _wallet;
   String? get errorMessage => _errorMessage;
   bool get isAuthenticated => _state == AuthState.authenticated;
 
-  // ─── Initialisation au démarrage ─────────────────────────────
   Future<void> init() async {
     final savedPhone = await _storage.read(key: 'phone');
     if (savedPhone != null && savedPhone.isNotEmpty) {
@@ -30,7 +28,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Connexion avec le numéro de téléphone ───────────────────
   Future<bool> login(String phoneNumber) async {
     _state = AuthState.loading;
     _errorMessage = null;
@@ -50,7 +47,6 @@ class AuthProvider extends ChangeNotifier {
         _phone = formattedPhone;
         _state = AuthState.authenticated;
 
-        // Sauvegarder le numéro de téléphone de façon sécurisée
         await _storage.write(key: 'phone', value: formattedPhone);
         notifyListeners();
         return true;
@@ -74,7 +70,6 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Déconnexion ─────────────────────────────────────────────
   Future<void> logout() async {
     await _storage.delete(key: 'phone');
     _phone = null;

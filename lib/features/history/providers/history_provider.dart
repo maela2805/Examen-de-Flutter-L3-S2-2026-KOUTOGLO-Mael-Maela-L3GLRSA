@@ -38,7 +38,6 @@ class HistoryProvider extends ChangeNotifier {
         _transactions = list
             .map((t) => Transaction.fromJson(t as Map<String, dynamic>))
             .toList();
-        // Trier par date décroissante
         _transactions.sort((a, b) => (b.createdAt ?? DateTime(0))
             .compareTo(a.createdAt ?? DateTime(0)));
         _state = HistoryState.loaded;

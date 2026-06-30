@@ -1,4 +1,3 @@
-/// Types de transactions correspondant à l'enum Java TransactionType
 enum TransactionType {
   deposit,
   withdrawal,
@@ -23,12 +22,10 @@ enum TransactionType {
     }
   }
 
-  /// True si la transaction est un crédit (argent reçu)
   bool get isCredit =>
       this == TransactionType.deposit ||
       this == TransactionType.transferReceive;
 
-  /// Libellé lisible en français
   String get label {
     switch (this) {
       case TransactionType.deposit:
@@ -44,7 +41,6 @@ enum TransactionType {
     }
   }
 
-  /// Icône associée
   String get emoji {
     switch (this) {
       case TransactionType.deposit:

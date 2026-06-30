@@ -117,12 +117,10 @@ class _TransferScreenState extends State<TransferScreen> {
                 children: [
                   const SizedBox(height: 24),
 
-                  // Champ destinataire
                   _buildReceiverField(),
 
                   const SizedBox(height: 36),
 
-                  // Affichage du montant
                   _buildAmountDisplay(),
 
                   const SizedBox(height: 32),
@@ -131,10 +129,8 @@ class _TransferScreenState extends State<TransferScreen> {
             ),
           ),
 
-          // Pavé numérique
           _buildNumpad(),
 
-          // Bouton confirmer
           Padding(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 32),
             child: SizedBox(

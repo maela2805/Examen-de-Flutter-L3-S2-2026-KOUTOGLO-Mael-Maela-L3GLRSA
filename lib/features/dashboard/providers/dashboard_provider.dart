@@ -61,7 +61,6 @@ class DashboardProvider extends ChangeNotifier {
       final all = list
           .map((t) => Transaction.fromJson(t as Map<String, dynamic>))
           .toList();
-      // Trier par date décroissante et prendre les 5 dernières
       all.sort((a, b) => (b.createdAt ?? DateTime(0))
           .compareTo(a.createdAt ?? DateTime(0)));
       _recentTransactions = all.take(5).toList();

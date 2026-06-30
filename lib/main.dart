@@ -14,16 +14,13 @@ import 'features/auth/screens/splash_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialiser les locales françaises pour intl
   await initializeDateFormatting('fr_FR', null);
 
-  // Forcer l'orientation portrait
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  // Personnaliser la barre de status système
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -42,22 +39,17 @@ class BadWalletApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // Auth — doit être instancié en premier
         ChangeNotifierProvider(create: (_) => AuthProvider()),
 
-        // Dashboard — dépend de AuthProvider
         ChangeNotifierProxyProvider<AuthProvider, DashboardProvider>(
           create: (_) => DashboardProvider(),
           update: (_, auth, dashboard) => dashboard!..updatePhone(auth.phone),
         ),
 
-        // Transfert
         ChangeNotifierProvider(create: (_) => TransferProvider()),
 
-        // Factures
         ChangeNotifierProvider(create: (_) => BillsProvider()),
 
-        // Historique
         ChangeNotifierProxyProvider<AuthProvider, HistoryProvider>(
           create: (_) => HistoryProvider(),
           update: (_, auth, history) => history!..updatePhone(auth.phone),
