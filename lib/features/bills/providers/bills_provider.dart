@@ -85,6 +85,8 @@ class BillsProvider extends ChangeNotifier {
     _errorMessage = null;
     notifyListeners();
 
+    final formattedPhone = phoneNumber.startsWith('+') ? phoneNumber : '+221$phoneNumber';
+
     try {
       final uri =
           Uri.parse('${ApiConstants.baseUrl}${ApiConstants.payFactures}');
@@ -93,7 +95,7 @@ class BillsProvider extends ChangeNotifier {
             uri,
             headers: {'Content-Type': 'application/json'},
             body: jsonEncode({
-              'phoneNumber': phoneNumber,
+              'phoneNumber': formattedPhone,
               'serviceName': serviceName,
               'factureReferences': _selectedRefs.toList(),
             }),

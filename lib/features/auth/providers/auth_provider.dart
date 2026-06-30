@@ -36,20 +36,22 @@ class AuthProvider extends ChangeNotifier {
     _errorMessage = null;
     notifyListeners();
 
+    final formattedPhone = phoneNumber.startsWith('+') ? phoneNumber : '+221$phoneNumber';
+
     try {
       final uri = Uri.parse(
-        '${ApiConstants.baseUrl}${ApiConstants.walletByPhone(phoneNumber)}',
+        '${ApiConstants.baseUrl}${ApiConstants.walletByPhone(formattedPhone)}',
       );
       final response = await http.get(uri).timeout(ApiConstants.timeout);
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
         _wallet = Wallet.fromJson(data);
-        _phone = phoneNumber;
+        _phone = formattedPhone;
         _state = AuthState.authenticated;
 
         // Sauvegarder le numéro de téléphone de façon sécurisée
-        await _storage.write(key: 'phone', value: phoneNumber);
+        await _storage.write(key: 'phone', value: formattedPhone);
         notifyListeners();
         return true;
       } else if (response.statusCode == 404) {

@@ -1,10 +1,11 @@
 // Constantes API — BadWallet Consumer App
 // Sur émulateur Android : localhost = 10.0.2.2
-// Sur vrai téléphone (même WiFi) : remplacer par l'IP locale du PC, ex: 192.168.1.x
+// Sur vrai téléphone (même WiFi) : utiliser l'IP locale du PC
 
 class ApiConstants {
-  // URL de base du backend
-  static const String baseUrl = 'http://10.0.2.2:8080';
+  // ⚠️ IP WiFi du PC pour test sur vrai téléphone (même réseau WiFi)
+  // Changer en '10.0.2.2' pour émulateur Android
+  static const String baseUrl = 'http://192.168.1.32:8080';
 
   // ─── Wallets ───────────────────────────────────────────────
   static const String wallets = '/api/wallets';
