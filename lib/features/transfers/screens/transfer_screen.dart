@@ -252,6 +252,33 @@ class _TransferScreenState extends State<TransferScreen> {
             fontWeight: FontWeight.w500,
           ),
         ),
+        const SizedBox(height: 16),
+        if (_amount > 0) ...[
+          Text(
+            'Frais de transfert : ${CurrencyFormatter.format((_amount * 0.01).clamp(0.0, 5000.0))}',
+            style: const TextStyle(
+              color: AppTheme.textSecondary,
+              fontSize: 13,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Total à débiter de votre compte : ${CurrencyFormatter.format(_amount + (_amount * 0.01).clamp(0.0, 5000.0))}',
+            style: const TextStyle(
+              color: AppTheme.primaryPurple,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ] else
+          const Text(
+            'Des frais de 1% (max 5 000 XOF) s\'appliqueront en sus du montant envoyé.',
+            style: TextStyle(
+              color: AppTheme.textMuted,
+              fontSize: 12,
+            ),
+            textAlign: TextAlign.center,
+          ),
       ],
     );
   }
