@@ -1,4 +1,4 @@
-# 📱 BadWallet Consumer App — Flutter
+# BadWallet Consumer App — Flutter
 
 > **Examen Flutter L3 S2 2026**  
 > **Étudiant** : KOUTOGLO Mael Maela — L3 GLRSA  
@@ -6,7 +6,7 @@
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 L'application suit une architecture **Feature-First** avec le pattern **Provider** pour la gestion d'état.
 
@@ -14,7 +14,7 @@ L'application suit une architecture **Feature-First** avec le pattern **Provider
 lib/
 ├── core/
 │   ├── constants/api_constants.dart     # Endpoints API
-│   ├── theme/app_theme.dart             # Thème sombre premium
+│   ├── theme/app_theme.dart             # Thème sombre
 │   └── utils/currency_formatter.dart    # Formatage XOF & dates
 ├── models/
 │   ├── transaction.dart
@@ -29,7 +29,7 @@ lib/
 └── main.dart
 ```
 
-## 🌿 Branches Git
+## Branches Git
 
 | Branche | Fonctionnalité |
 |---------|----------------|
@@ -41,7 +41,7 @@ lib/
 | `feature/history` | Historique groupé par date |
 | `feature/apk-build` | Icône app + build release APK |
 
-## 🚀 Lancer l'application
+## Lancer l'application
 
 ### Prérequis
 - Flutter 3.x
@@ -57,7 +57,7 @@ flutter run
 > **Note** : Sur l'émulateur Android, le backend est accessible via `10.0.2.2:8080`.  
 > Sur un vrai téléphone (même réseau WiFi), modifier `baseUrl` dans `api_constants.dart` avec l'IP locale du PC.
 
-## 📦 Générer l'APK
+## Générer l'APK
 
 ```bash
 flutter build apk --release
@@ -68,14 +68,14 @@ L'APK sera généré dans :
 build/app/outputs/flutter-apk/app-release.apk
 ```
 
-## 🎨 Design
+## Design
 
-- **Thème** : Sombre premium (fond #0F0F1A)
+- **Thème** : Sombre (fond #0F0F1A)
 - **Couleurs** : Dégradé violet (#6C63FF) → bleu (#3B82F6)
 - **Typo** : Poppins (Google Fonts)
-- **Transactions** : 🟢 Vert = crédit | 🔴 Rouge = débit
+- **Transactions** : Vert = crédit | Rouge = débit
 
-## 🔌 API Backend
+## API Backend
 
 | Endpoint | Usage |
 |----------|-------|
