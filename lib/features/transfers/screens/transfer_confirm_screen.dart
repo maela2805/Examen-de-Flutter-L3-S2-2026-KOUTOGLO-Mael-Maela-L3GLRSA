@@ -45,9 +45,20 @@ class TransferConfirmScreen extends StatelessWidget {
         ),
       );
     } else {
+      String errorMessage = provider.errorMessage ?? 'Échec du transfert';
+      if (errorMessage.contains('InsufficientBalanceException') ||
+          errorMessage.contains('Solde insuffisant')) {
+        errorMessage = 'Solde insuffisant pour effectuer ce transfert.';
+      } else if (errorMessage.contains('WalletNotFoundException') ||
+          errorMessage.contains('introuvable')) {
+        errorMessage = 'Le numéro du destinataire n\'est pas enregistré.';
+      } else {
+        errorMessage = 'Une erreur est survenue lors du transfert.';
+      }
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(provider.errorMessage ?? 'Échec du transfert'),
+          content: Text(errorMessage),
           backgroundColor: AppTheme.danger,
         ),
       );
